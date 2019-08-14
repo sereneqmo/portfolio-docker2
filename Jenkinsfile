@@ -2,6 +2,7 @@ pipeline {
     environment {
         registry = "sereneqmo/portfolio"
         registryCredential = 'sereneqmo-dockerhub'
+        sshCredentials = 'd575df88-c35c-42dc-a8bd-b4bc5bb45196'
         dockerImageBuildNumber = ''
         dockerImageLatest = ''
     }
@@ -37,6 +38,22 @@ pipeline {
                 script {
                     sh "docker rmi $registry:$BUILD_NUMBER"
                     sh "docker rmi $registry:latest"
+                }
+            }
+        }
+        stage('Deploy to Server') {
+            withCredentials([sshUserPrivateKey(credentialsId: sshCredentials, keyFileVariable: 'sshkey')]){
+                steps {
+                    script {
+                        sh """
+                            ssh -i ${sshkey} ec2-user@ec2-52-12-177-66.us-west-2.compute.amazonaws.com \
+                            ' \
+                            docker image rm sereneqmo/portfolio --force; \
+                            docker pull sereneqmo/portfolio; \
+                            docker run -d -p 80:80 sereneqmo/portfolio \
+                            ' \
+                        """
+                    }
                 }
             }
         }
