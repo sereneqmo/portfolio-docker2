@@ -48,9 +48,11 @@ pipeline {
                         sh """
                             ssh -i ${sshkey} -o 'StrictHostKeyChecking=no' ec2-user@ec2-54-70-27-216.us-west-2.compute.amazonaws.com \
                             ' \
-                            docker image rm sereneqmo/portfolio --force; \
+                            docker stop portfolio; \
+                            docker rm portfolio; \
+                            docker image rm sereneqmo/portfolio; \
                             docker pull sereneqmo/portfolio; \
-                            docker run -d -p 80:80 sereneqmo/portfolio \
+                            docker run -d -p 80:80 --name portfolio sereneqmo/portfolio \
                             ' \
                         """
                     }
