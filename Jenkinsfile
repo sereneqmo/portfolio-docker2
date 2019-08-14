@@ -46,7 +46,7 @@ pipeline {
                 withCredentials([sshUserPrivateKey(credentialsId: sshCredentials, keyFileVariable: 'sshkey')]){
                     script {
                         sh """
-                            ssh -i ${sshkey} ec2-user@ec2-52-12-177-66.us-west-2.compute.amazonaws.com \
+                            ssh -i ${sshkey} -o 'StrictHostKeyChecking=no' ec2-user@ec2-52-12-177-66.us-west-2.compute.amazonaws.com \
                             ' \
                             docker image rm sereneqmo/portfolio --force; \
                             docker pull sereneqmo/portfolio; \
