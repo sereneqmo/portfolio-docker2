@@ -1,0 +1,103 @@
+
+
+
+header{
+    background-size: cover;  
+    padding: 0;
+    background-position: center;
+    height: 100vh;
+}
+
+
+nav li a:hover {
+    color: rgb(196, 176, 139);
+  }
+
+
+h1{
+    font-size: 60px;
+    letter-spacing: 2px;
+    font-weight: bold;
+    text-align: center;
+    line-height: 100px;
+    padding-top: 270px;
+    color: white;
+}
+
+h2{
+    text-align: center;
+    font-weight: bold;
+    font-size: 30px;
+    line-height: 30px;
+    color: rgb(0, 0, 0);
+    
+}
+h3{
+    text-align: center;
+    font-size: 30px;
+    line-height: 20px;
+}
+
+.heart {
+    padding: 15px;
+    transition: transform .1s;
+    width: 20px;
+    height: 20px;
+    margin: 0 auto;
+    align-items:center;
+    justify-content:center;
+  }
+  
+.heart:hover {
+    -ms-transform: scale(1.1); 
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1); 
+  }
+
+.section-bg{
+    background-size: cover;
+    padding: 0;
+    background-position: center;
+    height: 100vh;
+    margin: 5;
+}
+.section-title{
+    color: black;
+    font-size: 50px;
+    line-height: 50px;
+}
+.col{
+    text-align: center;
+    line-height: 40px;
+    align-items:center;
+    justify-content:center;
+    font-size: 30px;
+}
+.link2{
+    background-color: rgba(255, 255, 255, 0.4);
+}
+a:link.link2 {
+    font-size: 20px;
+    color: rgb(209, 97, 97);
+    width: 2000px;
+    line-height: 30px;
+    margin:0 auto;
+}
+a:visited.link2{
+    color: rgb(211, 45, 45);
+    text-decoration: none;
+}
+a:hover.link2{
+    color: palevioletred;
+    text-decoration: underline;
+}
+a:active.link2{
+    color: rgb(189, 74, 74);
+    text-decoration: underline;
+}
+
+.col-centered {
+    float: none;
+    margin-right: auto;
+    margin-left: auto;
+}
