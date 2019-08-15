@@ -1,4 +1,5 @@
 pipeline {
+    //loadbalancer sample
     //Set the Environemnt for Docker Build
     environment {
         registry = "sereneqmo/portfolio" //My Dockerhub repo
