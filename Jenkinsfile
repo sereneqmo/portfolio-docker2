@@ -13,7 +13,7 @@ pipeline {
     stages {
         stage('Clone repo') {
             steps {
-                git url: 'https://github.com/sereneqmo/portfolio-docker.git'
+                git url: 'https://github.com/sereneqmo/portfolio-docker2.git'
                 //My github repo for all the files
             }
         }
@@ -57,7 +57,7 @@ pipeline {
                 withCredentials([sshUserPrivateKey(credentialsId: sshCredentials, keyFileVariable: 'sshkey')]){
                     script {
                         sh """
-                            ssh -i ${sshkey} -o 'StrictHostKeyChecking=no' ec2-user@ec2-54-70-27-216.us-west-2.compute.amazonaws.com \
+                            ssh -i ${sshkey} -o 'StrictHostKeyChecking=no' ec2-user@ec2-54-201-83-103.us-west-2.compute.amazonaws.com \
                             ' \
                             docker stop portfolio; \
                             docker rm portfolio; \
