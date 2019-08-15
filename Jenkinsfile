@@ -1,8 +1,9 @@
 pipeline {
+    //Set the Environemnt for Docker Build
     environment {
-        registry = "sereneqmo/portfolio"
-        registryCredential = 'sereneqmo-dockerhub'
-        sshCredentials = 'd575df88-c35c-42dc-a8bd-b4bc5bb45196'
+        registry = "sereneqmo/portfolio" //My Dockerhub repo
+        registryCredential = 'sereneqmo-dockerhub' //My pw to dockerhub - credential on Jenkins
+        sshCredentials = 'd575df88-c35c-42dc-a8bd-b4bc5bb45196' //My EC2 sshkey
         dockerImageBuildNumber = ''
         dockerImageLatest = ''
     }
@@ -13,8 +14,10 @@ pipeline {
         stage('Clone repo') {
             steps {
                 git url: 'https://github.com/sereneqmo/portfolio-docker.git'
+                //My github repo for all the files
             }
         }
+        //docker build . sereneqmo/portfolio
         stage('Building image') {
             steps {
                 script {
@@ -23,6 +26,7 @@ pipeline {
                 }
             }
         }
+        //docker push
         stage('Pushing image') {
             steps {
                 script {
@@ -33,6 +37,7 @@ pipeline {
                 }
             }
         }
+        //docker rm sereneqmo/portfolio
         stage('Cleaning environment') {
             steps {
                 script {
@@ -41,6 +46,12 @@ pipeline {
                 }
             }
         }
+        //shell into ec2 instance(no host key checking as Jenkins doesn't have memory)
+        //docker stop portfolio
+        //docker rm portfolio
+        //docker image rm portfolio
+        //docker pull sereneqmo/portfolio - pull the most updated image
+        //docker run -p 80:80 sereneqmo/portfolio (-d:docker container will start as a daemonized container --name portfolio)
         stage('Deploy to Server') {
             steps {
                 withCredentials([sshUserPrivateKey(credentialsId: sshCredentials, keyFileVariable: 'sshkey')]){
